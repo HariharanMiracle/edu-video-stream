@@ -24,9 +24,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 ReactDOM.render(
   <Router>
     <React.StrictMode>
-      <Route path="/login" component={LandLogin}/>
-      <Route path="/student/welcome" component={Student}/>
-      <Route path="/teacher/welcome" component={Teacher}/>
+      <Route exact path="/" component={LandLogin}/>
+      <Route exact path="/student/welcome" component={Student}/>
+      <Route exact path="/teacher/welcome" component={Teacher}/>
     </React.StrictMode>
   </Router>,
   document.getElementById('root')

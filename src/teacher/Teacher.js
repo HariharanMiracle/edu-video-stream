@@ -4,6 +4,9 @@ import Header from '../templates/Header.js';
 import MenuBar from '../templates/MenuBarTeacher.js';
 
 import ActivityMain from './ActivityMain.js';
+import StatusMain from './StatusMain.js'
+import ChatMain from './ChatMain.js'
+import GroupsMain from './GroupsMain.js'
 
 function Teacher(){
 
@@ -32,9 +35,9 @@ function Teacher(){
                     <Switch>
                         <Route path="/teacher/welcome" component={Main}/>
                         <Route path="/teacher/activitymain" component={ActivityMain}/>
-                        {/* <Route path="/teacher/chatmain" component={ChatMain}/> */}
-                        {/* <Route path="/teacher/groupsmain" component={GroupsMain}/> */}
-                        {/* <Route path="/teacher/statusmain" component={StatusMain}/> */}
+                        <Route path="/teacher/chatmain" component={ChatMain}/>
+                        <Route path="/teacher/groupsmain" component={GroupsMain}/>
+                        <Route path="/teacher/statusmain" component={StatusMain}/>
                     </Switch>
                     
                 </div>

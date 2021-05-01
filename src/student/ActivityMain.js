@@ -70,7 +70,7 @@ function ActivityMain(){
                                         setTabName(tabName => "taketest");
                                         setCurrentExamId(currentExamId => e.id);
                                         setCurrentExamName(currentExamName => e.name);
-                                    }}>Take Test</button>
+                                    }}>Join Lecture</button>
                                     &nbsp;
                                     <button className="btn btn-info" onClick={() => {
                                         setTabName(tabName => "result");
@@ -88,10 +88,10 @@ function ActivityMain(){
             return(<div>
                 <div className="row text-center">
                     <div className="col-md-2">
-                        <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Examination</button>
+                        <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Lecture</button>
                     </div>
                     <div className="col-md-2">
-                        <button className="btn btn-link" onClick={() => setTabName(tabName => "taketest")}>Take Test</button>
+                        <button className="btn btn-link" onClick={() => setTabName(tabName => "taketest")}>Join Lecture</button>
                     </div>
                     <div className="col-md-2">
                         <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Result</button>
@@ -114,10 +114,10 @@ function ActivityMain(){
             return(<div>
                 <div className="row text-center">
                     <div className="col-md-2">
-                        <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Examination</button>
+                        <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Lecture</button>
                     </div>
                     <div className="col-md-2">
-                        <button className="btn btn-link" onClick={() => setTabName(tabName => "taketest")}>Take Test</button>
+                        <button className="btn btn-link" onClick={() => setTabName(tabName => "taketest")}>Join Lecture</button>
                     </div>
                     <div className="col-md-2">
                         <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Result</button>
@@ -136,7 +136,7 @@ function ActivityMain(){
 
     return(
         <div className="col-md-11 p-4">
-            <h1>Activities</h1>
+            <h1>Lecture</h1>
             <Tab val={tabName}/>
         </div>
     );

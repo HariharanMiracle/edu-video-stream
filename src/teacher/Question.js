@@ -19,6 +19,10 @@ function Question(){
         for(var i = 0; i < exam.length; i++){
             if(document.getElementById("question_" + exam[i].id) != null){
                 document.getElementById("question_" + exam[i].id).value = exam[i].question;
+                document.getElementById("correctAnswer_" + exam[i].id).value = exam[i].correct;
+                document.getElementById("answer1_" + exam[i].id).value = exam[i].answer1;
+                document.getElementById("answer2_" + exam[i].id).value = exam[i].answer2;
+                document.getElementById("answer3_" + exam[i].id).value = exam[i].answer3;
             }
         }
     });
@@ -36,6 +40,48 @@ function Question(){
         }
         setExam(exam => examArr);
     }
+
+    function updateCorrectAnswer(id, val){
+        var examArr = exam;
+        for(var i = 0; i < examArr.length; i++){
+            if(examArr[i].id == id){
+                examArr[i].correct = val;
+            }
+        }
+        setExam(exam => examArr);
+    }
+
+    function updateAnswer1(id, val){
+        var examArr = exam;
+        for(var i = 0; i < examArr.length; i++){
+            if(examArr[i].id == id){
+                examArr[i].answer1 = val;
+            }
+        }
+        setExam(exam => examArr);
+    }
+
+    function updateAnswer2(id, val){
+        var examArr = exam;
+        for(var i = 0; i < examArr.length; i++){
+            if(examArr[i].id == id){
+                examArr[i].answer2 = val;
+            }
+        }
+        setExam(exam => examArr);
+    }
+
+    function updateAnswer3(id, val){
+        var examArr = exam;
+        for(var i = 0; i < examArr.length; i++){
+            if(examArr[i].id == id){
+                examArr[i].answer3 = val;
+            }
+        }
+        setExam(exam => examArr);
+    }
+
+    
 
     function createExam(){
         var next = examIndex + 1;
@@ -72,16 +118,16 @@ function Question(){
                             <input type="text" className="form-control question" placeholder="Question" id={'question_' + e.id} onChange={y => updateQuestion(e.id, y.target.value)} required/>
                             <div className="row mt-2">
                                 <div className="col-md-3">
-                                    <input type="text" className="form-control correctAnswer" placeholder="Correct Answer" required/><br/>
+                                    <input type="text" className="form-control correctAnswer" id={'correctAnswer_' + e.id} placeholder="Correct Answer" onChange={y => updateCorrectAnswer(e.id, y.target.value)} required/><br/>
                                 </div>
                                 <div className="col-md-3">
-                                    <input type="text" className="form-control answer1" placeholder="Answer 1" required/><br/>
+                                    <input type="text" className="form-control answer1" placeholder="Answer 1" id={'answer1_' + e.id} onChange={y => updateAnswer1(e.id, y.target.value)} required/><br/>
                                 </div>
                                 <div className="col-md-3">
-                                    <input type="text" className="form-control answer2" placeholder="Answer 2" required/><br/>
+                                    <input type="text" className="form-control answer2" placeholder="Answer 2" id={'answer2_' + e.id} onChange={y => updateAnswer2(e.id, y.target.value)} required/><br/>
                                 </div>
                                 <div className="col-md-3">
-                                    <input type="text" className="form-control answer3" placeholder="Answer 3" required/><br/>
+                                    <input type="text" className="form-control answer3" placeholder="Answer 3" id={'answer3_' + e.id} onChange={y => updateAnswer3(e.id, y.target.value)} required/><br/>
                                 </div>
                                 <button className="btn btn-danger ml-5" style={{borderRadius:"50%", height:"50px", width:"50px"}}><h1 style={{marginTop:"-10px", marginLeft:"-2px"}} onClick={() => deleteQuestion(e.id)}>-</h1></button>
                             </div>

@@ -98,7 +98,7 @@ function LandLogin(){
                 <div className="col-md-6 p-5">
                     <div style={{height: "400px", backgroundColor: "#e9e6f7", borderRadius: "10px", border: "3px solid #c6c3d4"}}>
                         <div className="text-center p-5">
-                            <h4>Teacher Login</h4><br/>
+                            <h4>Lecture Login</h4><br/>
                             <input type="text" class="form-control" id="teacherUsername" placeholder="Username" value={teacherUsername} onChange={updTeacherUsername}/><br/>
                             <input type="password" class="form-control" id="teacherPassword" placeholder="Password" value={teacherPassword} onChange={updTeacherPassword}/><br/>
                             <button className="btn btn-info" onClick={teacherLogin}>Login</button>

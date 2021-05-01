@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function ChatMain(){
+function GroupsMain(){
     const styleOvr = {
         height: "480px",
         width: "100%",
@@ -99,7 +99,7 @@ function ChatMain(){
         if(currentChat === 0){
             return(
                 <div className="p-5">
-                    <h1>Welcome to chat !!!</h1>
+                    <h1>Welcome to groups !!!</h1>
                     <p>Choose a channel...</p>
                 </div>
             );
@@ -155,7 +155,7 @@ function ChatMain(){
         if(props.val === "initial"){
             return(
                 <div className="p-5">
-                    <h1>Welcome to chat !!!</h1>
+                    <h1>Welcome to groups !!!</h1>
                     <p>Choose a channel...</p>
                 </div>
             );
@@ -292,4 +292,4 @@ function ChatMain(){
     );
   }
   
-  export default ChatMain;
+  export default GroupsMain;
