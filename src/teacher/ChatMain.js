@@ -77,8 +77,10 @@ function ChatMain(){
     }     
     
     function send(){
-        console.log("message sent: " + sendMessage);
-        setSendMessage(sendMessage => "");
+        var msg = document.getElementById("sendMessage").value;
+        console.log("message sent: " + msg);
+        document.getElementById("sendMessage").value = "";
+        // setSendMessage(sendMessage => "");
     }
 
     function loadChat(channelId, channelName) {
@@ -93,6 +95,19 @@ function ChatMain(){
         }
         document.getElementById(channelId).style.backgroundColor = "#312e45";
         document.getElementById(channelId).style.color = "white";
+    }
+
+    function SendChat(){
+        return(
+                <div className="row pl-5 pr-5 pt-2">
+                    <div className="col-md-11">
+                        <input type="text" class="form-control" id="sendMessage" placeholder="Type..."/>
+                    </div>
+                    <div className="col-md-1">
+                        <button className="btn btn-info" onClick={send}>Send</button>
+                    </div>
+                </div>
+        );
     }
 
     function ChatThread(){
@@ -138,14 +153,7 @@ function ChatMain(){
                         )
                     }
                 </div>
-                <div className="row pl-5 pr-5 pt-2">
-                    <div className="col-md-11">
-                        <input type="text" class="form-control" id="sendMessage" placeholder="Type..." value={sendMessage} onChange={updSendMessage}/>
-                    </div>
-                    <div className="col-md-1">
-                        <button className="btn btn-info" onClick={send}>Send</button>
-                    </div>
-                </div>
+                <SendChat />
             </div>
             );
         }
@@ -196,7 +204,7 @@ function ChatMain(){
                 </div>
                 <div className="row pl-5 pr-5 pt-2">
                     <div className="col-md-11">
-                        <input type="text" class="form-control" id="sendMessage" placeholder="Type..." value={sendMessage} onChange={updSendMessage}/>
+                        <input type="text" class="form-control" id="sendMessage" placeholder="Type..."/>
                     </div>
                     <div className="col-md-1">
                         <button className="btn btn-info" onClick={send}>Send</button>

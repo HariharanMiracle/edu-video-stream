@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function LandLogin(){
     const [studentUsername, setStudentUsername] = React.useState("");
@@ -25,25 +26,65 @@ function LandLogin(){
     }
 
     function studentLogin() {
-        if(studentUsername==="root" && studentPassword==="root"){
-            setStudentLoginErrMsg(studentLoginErrMsg => "");
-            window.location.replace("http://localhost:3000/student/welcome")
-        }
-        else if(studentUsername==="" || studentPassword==="")
+        if(studentUsername==="" || studentPassword===""){
             setStudentLoginErrMsg(studentLoginErrMsg => "Username or Password cannot be empty !!!");
-        else
-            setStudentLoginErrMsg(studentLoginErrMsg => "Incorrect Username or Password !!!");
+        }
+        else{
+            const axios = require('axios');
+            axios.get('http://proctoringg.herokuapp.com/user/' + studentUsername)
+            .then(e => {
+                console.log(e.data);
+                if(e.data.user != null && e.data.user.type===1){
+                    if(e.data.user.password === studentPassword){
+                        console.log("1");
+                        setStudentLoginErrMsg(studentLoginErrMsg => "");
+
+                        localStorage.setItem('user_id', e.data.user.id);
+
+                        window.location.replace("http://localhost:3000/student/welcome")
+                    }
+                    else{
+                        console.log("2" + e.data.user.password);
+                        setStudentLoginErrMsg(studentLoginErrMsg => "Incorrect Username or Password !!!");
+                    }
+                }
+                else{
+                    console.log("3");
+                    setStudentLoginErrMsg(studentLoginErrMsg => "Incorrect Username or Password !!!");
+                }
+            })
+        }
     }
 
     function teacherLogin() {
-        if(teacherUsername==="root" && teacherPassword==="root"){
-            setTeacherLoginErrMsg(teacherLoginErrMsg => "");
-            window.location.replace("http://localhost:3000/teacher/welcome")
+        if(teacherUsername==="" || teacherPassword===""){
+            setTeacherLoginErrMsg(teacherLoginErrMsg => "Username or Password cannot be empty !!!");
         }
-        else if(teacherUsername==="" || teacherPassword==="")
-            setTeacherLoginErrMsg(teacherLoginErrMsg => "Username and Password cannot be empty !!!");
-        else
-            setTeacherLoginErrMsg(teacherLoginErrMsg => "Incorrect Username or Password !!!");
+        else{
+            const axios = require('axios');
+            axios.get('http://proctoringg.herokuapp.com/user/' + teacherUsername)
+            .then(e => {
+                console.log(e.data);
+                if(e.data.user != null){
+                    if(e.data.user.password === teacherPassword){
+                        console.log("1");
+                        setTeacherLoginErrMsg(teacherLoginErrMsg => "");
+                        
+                        localStorage.setItem('user_id', e.data.user.id);
+
+                        window.location.replace("http://localhost:3000/teacher/welcome")
+                    }
+                    else{
+                        console.log("2" + e.data.user.password);
+                        setTeacherLoginErrMsg(teacherLoginErrMsg => "Incorrect Username or Password !!!");
+                    }
+                }
+                else{
+                    console.log("3");
+                    setTeacherLoginErrMsg(teacherLoginErrMsg => "Incorrect Username or Password !!!");
+                }
+            })
+        }
     }
 
     function StudentLoginError(){

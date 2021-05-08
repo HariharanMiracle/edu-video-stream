@@ -1,7 +1,52 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 
 function Question(){
     
+    function submitExam(){
+        var startTime = document.getElementById("startTime").value;
+        var startTimeRes = startTime.split("T");
+        var startTime =  startTimeRes[0] + " " + startTimeRes[1];
+    
+        var endTime = document.getElementById("endTime").value;
+        var endTimeRes = endTime.split("T");
+        var endTime =  endTimeRes[0] + " " + endTimeRes[1];
+    
+        var newExamNameStr = document.getElementById("newExamName").value;
+        var teacher = document.getElementById("teacher").value;
+
+        var postJson = {
+            "name":newExamNameStr,
+            "teacher":teacher,
+            "start_time":startTime,
+            "end_time":endTime,
+            "questions":[]
+        }
+
+        for(var i = 0; i < exam.length; i++){
+            postJson.questions.push({
+                "questionName":exam[i].question,
+                "answer1":exam[i].answer1,
+                "answer2":exam[i].answer2,
+                "answer3":exam[i].answer3,
+                "correct":exam[i].correct
+            });
+        }
+
+        const axios = require('axios');
+            axios.post('http://proctoringg.herokuapp.com/lecture', postJson)
+            .then(e => {
+                console.log(e.data);
+                if(e.data.result === true){
+                    alert("Exam created: successfully!");
+                    
+                }
+                else{
+                    alert("Exam created: failed!");
+                }
+            })
+    }
+
     const [examIndex, setExamIndex] = React.useState(0);
     const [newExamName, setNewExamName] = React.useState("");
     const [exam, setExam] = React.useState([
@@ -118,9 +163,6 @@ function Question(){
                             <input type="text" className="form-control question" placeholder="Question" id={'question_' + e.id} onChange={y => updateQuestion(e.id, y.target.value)} required/>
                             <div className="row mt-2">
                                 <div className="col-md-3">
-                                    <input type="text" className="form-control correctAnswer" id={'correctAnswer_' + e.id} placeholder="Correct Answer" onChange={y => updateCorrectAnswer(e.id, y.target.value)} required/><br/>
-                                </div>
-                                <div className="col-md-3">
                                     <input type="text" className="form-control answer1" placeholder="Answer 1" id={'answer1_' + e.id} onChange={y => updateAnswer1(e.id, y.target.value)} required/><br/>
                                 </div>
                                 <div className="col-md-3">
@@ -128,6 +170,9 @@ function Question(){
                                 </div>
                                 <div className="col-md-3">
                                     <input type="text" className="form-control answer3" placeholder="Answer 3" id={'answer3_' + e.id} onChange={y => updateAnswer3(e.id, y.target.value)} required/><br/>
+                                </div>
+                                <div className="col-md-3">
+                                    <input type="number" className="form-control correctAnswer" id={'correctAnswer_' + e.id} placeholder="Correct Answer" onChange={y => updateCorrectAnswer(e.id, y.target.value)} required/><br/>
                                 </div>
                                 <button className="btn btn-danger ml-5" style={{borderRadius:"50%", height:"50px", width:"50px"}}><h1 style={{marginTop:"-10px", marginLeft:"-2px"}} onClick={() => deleteQuestion(e.id)}>-</h1></button>
                             </div>
@@ -140,14 +185,25 @@ function Question(){
 
     return(
         <div className="p-4">
-            <h3>Create New Examination</h3>
+            <h3>Create New Questions</h3>
             <hr/>
             <div className="container">
-                <input type="text" className="form-control" placeholder="Examination Name" value={newExamName} onChange={updateNewExamName}/><br/>
+                <div className="row">
+                    <div className="col-md-6">
+                        <h5>Start Time: </h5>
+                        <input type="datetime-local" className="form-control" placeholder="Start Time" id="startTime"/><br/>
+                    </div>
+                    <div className="col-md-6">
+                        <h5>End Time: </h5>
+                        <input type="datetime-local" className="form-control" placeholder="End Time" id="endTime"/><br/>
+                    </div>
+                </div>
+                <input type="text" className="form-control" placeholder="Name" id="newExamName" value={newExamName} onChange={updateNewExamName}/><br/>
+                <input type="text" className="form-control" placeholder="Teacher Name" id="teacher"/><br/>
                 <Exams />
                 <br/>
                 <button className="btn btn-success" style={{borderRadius:"50%", height:"50px", width:"50px"}}><h1 style={{marginTop:"-10px", marginLeft:"-2px"}} onClick={() => createExam()}>+</h1></button>
-                <button className="btn btn-info ml-2" onClick={() => alert("create exam")}>Create Exam</button>
+                <button className="btn btn-info ml-2" onClick={submitExam}>Create</button>
             </div>
         </div>
     );

@@ -77,8 +77,10 @@ function GroupsMain(){
     }     
     
     function send(){
-        console.log("message sent: " + sendMessage);
-        setSendMessage(sendMessage => "");
+        var msg = document.getElementById("sendMessage").value;
+        console.log("message sent: " + msg);
+        document.getElementById("sendMessage").value = "";
+        // setSendMessage(sendMessage => "");
     }
 
     function loadChat(channelId, channelName) {
@@ -140,7 +142,7 @@ function GroupsMain(){
                 </div>
                 <div className="row pl-5 pr-5 pt-2">
                     <div className="col-md-11">
-                        <input type="text" class="form-control" id="sendMessage" placeholder="Type..." value={sendMessage} onChange={updSendMessage}/>
+                        <input type="text" class="form-control" id="sendMessage" placeholder="Type..."/>
                     </div>
                     <div className="col-md-1">
                         <button className="btn btn-info" onClick={send}>Send</button>
@@ -196,7 +198,7 @@ function GroupsMain(){
                 </div>
                 <div className="row pl-5 pr-5 pt-2">
                     <div className="col-md-11">
-                        <input type="text" class="form-control" id="sendMessage" placeholder="Type..." value={sendMessage} onChange={updSendMessage}/>
+                        <input type="text" class="form-control" id="sendMessage" placeholder="Type..."/>
                     </div>
                     <div className="col-md-1">
                         <button className="btn btn-info" onClick={send}>Send</button>
