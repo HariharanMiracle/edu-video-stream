@@ -122,6 +122,7 @@ function ActivityMain(){
                     <div>
                         <h5 className="text-white"><u>Overall Focus Level</u></h5>
                         <DonutChart
+                                    style={{color:"white"}}
                                     height="300"
                                     width="300"
                                     data={[{
@@ -308,13 +309,21 @@ function ActivityMain(){
     }
 
     const tab2StyleOvr1 = {
-        height: "485px",
+        height: "608px",
         overflow: "auto",
         float: "left",
         position: "relative",
         backgroundColor: "white",
         padding: "20px",
     }
+
+    const dot = {
+        height: "30px",
+        width: "30px",
+        backgroundColor: "#bbb",
+        borderRadius: "50%",
+        display: "inline-block",
+      }
 
     const [currentExamName, setCurrentExamName] = React.useState("");
     const [tabName, setTabName] = React.useState("activity");
@@ -345,6 +354,22 @@ function ActivityMain(){
     function Tab(props){
         if(props.val === "activity"){
             return(<div className="container">
+                <div>
+                    <h1>Activities</h1>
+                    <button className="btn btn-info mb-3" onClick={() => setTabName(tabName => "createnewtest")}>Create New Lecture</button>
+                    <div className="row text-center">
+                        <div className="col-md-2">
+                            <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Lecture</button>
+                        </div>
+                        {/* <div className="col-md-2">
+                            <button className="btn btn-link" onClick={() => setTabName(tabName => "viewtest")}>Join Lecture</button>
+                        </div> */}
+                        <div className="col-md-2">
+                            <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Result</button>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
                 <div style={styleOvr}>
                     {
                         exams.map(e => 
@@ -373,20 +398,73 @@ function ActivityMain(){
             </div>);
         }
         else if(props.val === "taketest"){
+
+
+            // var sec1 = 0;
+            // var sec2 = 0;
+            // var min1 = 0;
+            // var min2 = 0;
+            // var hour1 = 0;
+            // var hour2 = 0;
+        
+            // var myVar = setInterval(myTimer, 1000);
+        
+        // function myTimer() {
+        //   sec1++;
+        //   if(sec1 == 10){
+        //       sec1 = 0;
+        //     sec2++;
+        //     if(sec2 == 6){
+        //         sec2 = 0;
+        //         min1++;
+        //         if(min1 == 10){
+        //             min1 = 0;
+        //             min2++;
+        //             if(min2 == 6){
+        //                 min2 = 0;
+        //                 hour1++;
+        //                 if(hour1 == 10){
+        //                     hour1 = 0;
+        //                     hour2++;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //   }
+          
+        //   document.getElementById("demo").innerHTML = hour2 + "" + hour1 + ":" + min2 + "" + min1 +  ":" + sec2 + "" + sec1;
+        // }
+
+
             return(<div>
-                <div className="row text-center">
-                    <div className="col-md-2">
-                        <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Lecture</button>
+
+                <div className="row" style={{height:"75px", backgroundColor:"#333333"}}>
+                    <div className="col-md-9">
+                        <p id="demo" className="mt-4 ml-4 text-white"></p>
                     </div>
+                    <div className="col-md-3 mt-3">
+                        <span className="text-white">
+                            <span className="ml-4" style={dot}></span>
+                            <span className="ml-2" style={dot}></span>
+                            <span className="ml-2" style={dot}></span>
+                            <button className="ml-3 btn btn-danger" onClick={() => setTabName(tabName => "activity")}>Leave</button>
+                        </span>
+                    </div>
+                </div>
+
+                <div className="row text-center">
+                    {/* <div className="col-md-2">
+                        <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Lecture</button>
+                    </div> */}
                     {/* <div className="col-md-2">
                         <button className="btn btn-link" onClick={() => setTabName(tabName => "taketest")}>Join Lecture</button>
                     </div> */}
-                    <div className="col-md-2">
+                    {/* <div className="col-md-2">
                         <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Result</button>
-                    </div>
+                    </div> */}
                 </div>
-                <br/>
-                <div className="row pl-3">
+                {/* <br/> */}
+                <div className="row">
                     {/* <div style={tab2StyleOvr} className="col-md-6">
                         <h3>#{currentExamId} - {currentExamName} - Quiz</h3>
                         <br />
@@ -404,7 +482,7 @@ function ActivityMain(){
 
                         <button type="button" class="btn btn-primary">Next Question</button>
                     </div> */}
-                    <div style={{height: "485px"}} className="col-md-8 bg-dark p-2 text-white">
+                    <div style={{height: "608px"}} className="col-md-9 bg-dark p-2 text-white">
                         <Webcam
                             audio={false}
                             height='100%'
@@ -417,7 +495,7 @@ function ActivityMain(){
                         <center><h4 style={{color: '#000'}}>{camResult != "" ? camResult : null}</h4></center>
                         
                     </div>
-                    <div style={tab2StyleOvr1} className="col-md-4 bg-dark p-2 text-white">
+                    <div style={tab2StyleOvr1} className="col-md-3 bg-dark p-2 text-white">
                         
                         <div className="text-white">
                             <DonutList />
@@ -431,6 +509,8 @@ function ActivityMain(){
         else if(props.val === "createnewtest"){
             return(
                 <div>
+                    <h1>Activities</h1>
+                    <button className="btn btn-info mb-3" onClick={() => setTabName(tabName => "createnewtest")}>Create New Lecture</button>
                     <div className="row text-center">
                     <div className="col-md-2">
                         <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Lecture</button>
@@ -455,6 +535,8 @@ function ActivityMain(){
         }
         else{
             return(<div>
+                <h1>Activities</h1>
+                <button className="btn btn-info mb-3" onClick={() => setTabName(tabName => "createnewtest")}>Create New Lecture</button>
                 <div className="row text-center">
                     <div className="col-md-2">
                         <button className="btn btn-link" onClick={() => setTabName(tabName => "activity")}>Lecture</button>
@@ -478,9 +560,7 @@ function ActivityMain(){
     }
 
     return(
-        <div className="col-md-11 p-4">
-            <h1>Activities</h1>
-            <button className="btn btn-info mb-3" onClick={() => setTabName(tabName => "createnewtest")}>Create New Lecture</button>
+        <div className="col-md-11">
             <Tab val={tabName}/>
         </div>
     );
