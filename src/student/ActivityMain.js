@@ -375,7 +375,8 @@ function ActivityMain(){
 
     const capture = React.useCallback(
         () => {
-            // if(tabName === "taketest"){
+            console.log(tabName);
+            if(tabName === "taketest"){
                 
 
                 var blob = null;
@@ -399,7 +400,7 @@ function ActivityMain(){
                 // alert("predict");
 
                 console.log("Post the form, just make sure to set the 'Content-Type' header");
-            // }
+            }
         },
         [webcamRef]
     );
