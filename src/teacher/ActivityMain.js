@@ -7,6 +7,7 @@ import DonutChart from 'react-donut-chart';
 
 function ActivityMain(){
     const [currentExamId, setCurrentExamId] = React.useState(0);
+    const [currentExamIdDate, setCurrentExamIdDate] = React.useState("");
 
     useInterval(() => {
         // Your custom logic here
@@ -165,6 +166,9 @@ function ActivityMain(){
         var d = new Date();
         var strD = d + "";
         console.log("date " + strD);
+
+        setCurrentExamIdDate(currentExamIdDate => vard);
+
 
         var var_now_time = strD.split(" ");
         var var_1_time = vard.split(" ");
@@ -365,7 +369,7 @@ function ActivityMain(){
                             <button className="btn btn-link" onClick={() => setTabName(tabName => "viewtest")}>Join Lecture</button>
                         </div> */}
                         <div className="col-md-2">
-                            <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Result</button>
+                            <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Engagement Report</button>
                         </div>
                     </div>
                     <br/>
@@ -388,8 +392,9 @@ function ActivityMain(){
                                     <button className="btn btn-info" onClick={() => {
                                         setTabName(tabName => "result");
                                         setCurrentExamId(currentExamId => e.id);
+                                        setCurrentExamIdDate(currentExamIdDate => e.start_time);
                                         setCurrentExamName(currentExamName => e.name);
-                                    }}>Result</button>
+                                    }}>Engagement Report</button>
                                 </div>
                             </div>
                         )
@@ -519,7 +524,7 @@ function ActivityMain(){
                         <button className="btn btn-link" onClick={() => setTabName(tabName => "viewtest")}>Join Lecture</button>
                     </div> */}
                     <div className="col-md-2">
-                        <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Result</button>
+                        <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Engagement Report</button>
                     </div>
                 </div>
                 <br/>
@@ -545,13 +550,44 @@ function ActivityMain(){
                         <button className="btn btn-link" onClick={() => setTabName(tabName => "taketest")}>Join Lecture</button>
                     </div> */}
                     <div className="col-md-2">
-                        <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Result</button>
+                        <button className="btn btn-link" onClick={() => setTabName(tabName => "result")}>Engagement Report</button>
                     </div>
                 </div>
                 <br/>
                 <div className="row pl-3">
                     <div style={styleOvr} className="col-md-12">
-                        <h3>#{currentExamId} - {currentExamName} - Result</h3>
+                        <div style={styleOvr}>
+                            <div className="row pl-3 pr-3">
+                                {
+                                    donutList.map(e => 
+                                        <div>
+                                            {/* <div className="col-md-4 mt-3"> */}
+                                                <div className="row">
+                                                    <div className="col-md-1"></div>
+                                                    <div className="col-md-10 text-center text-white p-3" style={{backgroundColor:"#312e45", borderRadius:"5px"}}>
+                                                        <h5 className="text-white">{e.name}</h5>
+                                                        <p style={{color: "#a1a1a1"}}>{currentExamIdDate}</p>
+                                                        <br/>
+                                                        <DonutChart
+                                                            height="220"
+                                                            width="300"
+                                                            data={[{
+                                                                label: 'On Focus',
+                                                                value: e.on_focus
+                                                            },
+                                                            {
+                                                                label: 'Out Focus',
+                                                                value: e.off_focus,
+                                                            }]}/>
+                                                    </div>
+                                                    <div className="col-md-1"></div>
+                                                </div>
+                                            </div>
+                                        // </div>
+                                    )
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
