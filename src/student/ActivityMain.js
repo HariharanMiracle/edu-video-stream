@@ -5,6 +5,45 @@ import axios from 'axios';
 import DonutChart from 'react-donut-chart';
 
 function ActivityMain(){
+
+    const videoConstraints = {
+        width: 1280,
+        height: 720,
+        facingMode: "user"
+    };
+    
+    const styleOvr = {
+        height: "480px",
+        width: "100%",
+        overflow: "auto",
+        float: "left",
+        position: "relative",
+        marginLeft: "-5px",
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "3px",
+        border: "2px solid #b8b8b8"
+    }
+
+    const tab2StyleOvr = {
+        height: "460px",
+        overflow: "auto",
+        float: "left",
+        position: "relative",
+        marginLeft: "-5px",
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "3px",
+        border: "2px solid #b8b8b8"
+    }
+
+    const [currentExamId, setCurrentExamId] = React.useState(0);
+    const [currentExamName, setCurrentExamName] = React.useState("");
+    const [tabName, setTabName] = React.useState("activity");
+    const [camResult, setCamResult] = React.useState("");
+    const [exams, setExams] = React.useState([
+    ]);
+
     const dot = {
         height: "30px",
         width: "30px",
@@ -14,6 +53,65 @@ function ActivityMain(){
       }
     const [donutOnFocus, setDonutOnFocus] = React.useState(100);
     const [donutOutFocus, setDonutOutFocus] = React.useState(0);
+
+    const MINUTE_MS = 8000;
+
+    const webcamRef = React.useRef(null);
+
+    const capture = React.useCallback(
+        () => {
+                var blob = null;
+                console.log(webcamRef);
+                const imageSrc = webcamRef.current.getScreenshot();
+    
+                if(imageSrc === "data:,"){
+                    // alert("empty");
+                }
+                else{
+                    // Post Image to Server
+                    fetch(imageSrc).then(res => blob = res.blob());
+        
+                    const formData = new FormData();
+                    formData.append('image', imageSrc);
+
+                    // alert("imageSrc: " + imageSrc)
+        
+                    // Post the form, just make sure to set the 'Content-Type' header
+                    // axios.post('http://proctoringg.herokuapp.com/predict',formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(
+                    //     res => {
+                    //         alert(res.data);
+                    //         console.log(res.data);
+                    //         setCamResult(res.data.result);
+                    //     }
+                    // )
+                    // alert("predict");
+
+                    console.log("Post the form, just make sure to set the 'Content-Type' header");
+                }
+        },
+        [webcamRef]
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function DisplayDonut(){
         // alert("*" + donutOnFocus + "--" + donutOutFocus);
@@ -244,7 +342,7 @@ function ActivityMain(){
                     <div className="col-md-3"><input type="radio" name="answer2" id="answer2" /> <p>{question.answer2}</p></div>
                     <div className="col-md-3"><input type="radio" name="answer3" id="answer3" /> <p>{question.answer3}</p></div>
                     <input type="hidden" name="correct" id="correct" value={question.correct} />
-                    <div className="col-md-3"><button className="btn btn-info" onClick={submitQuestion}>Submit</button></div>
+                    <div className="col-md-3"><button className="btn btn-info" onClick={() => submitQuestion}>Submit</button></div>
                 </div>
             </div>
         );
@@ -278,7 +376,9 @@ function ActivityMain(){
                         // can join
 
                         alert("Welcome to the lecture!");
-                        setTabName(tabName => vara);
+                        alert(vara)
+                        setTabName(tabName => "taketest");
+                        alert(tabName)
                         setCurrentExamId(currentExamId => varb);
                         setCurrentExamName(currentExamName => varc); 
                     }
@@ -289,14 +389,21 @@ function ActivityMain(){
             }
         }
 
-                        setTabName(tabName => vara);
+                        setTabName(tabName => "taketest");
                         setCurrentExamId(currentExamId => varb);
                         setCurrentExamName(currentExamName => varc); 
 
         
     }
 
-    const MINUTE_MS = 8000;
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -331,79 +438,21 @@ function ActivityMain(){
 		})	
     }, [])
 
-    const videoConstraints = {
-        width: 1280,
-        height: 720,
-        facingMode: "user"
-    };
-    
-    const styleOvr = {
-        height: "480px",
-        width: "100%",
-        overflow: "auto",
-        float: "left",
-        position: "relative",
-        marginLeft: "-5px",
-        backgroundColor: "white",
-        padding: "20px",
-        borderRadius: "3px",
-        border: "2px solid #b8b8b8"
-    }
-
-    const tab2StyleOvr = {
-        height: "460px",
-        overflow: "auto",
-        float: "left",
-        position: "relative",
-        marginLeft: "-5px",
-        backgroundColor: "white",
-        padding: "20px",
-        borderRadius: "3px",
-        border: "2px solid #b8b8b8"
-    }
-
     
 
-    const [currentExamId, setCurrentExamId] = React.useState(0);
-    const [currentExamName, setCurrentExamName] = React.useState("");
-    const [tabName, setTabName] = React.useState("activity");
-    const [camResult, setCamResult] = React.useState("");
-    const [exams, setExams] = React.useState([
-    ]);
 
-    const webcamRef = React.useRef(null);
 
-    const capture = React.useCallback(
-        () => {
-            console.log(tabName);
-            if(tabName === "taketest"){
-                
 
-                var blob = null;
-                console.log(webcamRef);
-                const imageSrc = webcamRef.current.getScreenshot();
-    
-                // Post Image to Server
-                fetch(imageSrc).then(res => blob = res.blob());
-    
-                const formData = new FormData();
-                formData.append('image', imageSrc);
-    
-                // Post the form, just make sure to set the 'Content-Type' header
-                // axios.post('http://proctoringg.herokuapp.com/predict',formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(
-                //     res => {
-                //         alert(res.data);
-                //         console.log(res.data);
-                //         setCamResult(res.data.result);
-                //     }
-                // )
-                // alert("predict");
 
-                console.log("Post the form, just make sure to set the 'Content-Type' header");
-            }
-        },
-        [webcamRef]
-    );
+
+
+
+
+
+
+
+
+
 
     function Tab(props){
         if(props.val === "activity"){
@@ -430,6 +479,14 @@ function ActivityMain(){
                                         setCurrentExamName(currentExamName => e.name);
                                     }}>Result</button>
                                 </div>
+                                <Webcam
+                                    audio={false}
+                                    height='0%'
+                                    ref={webcamRef}
+                                    screenshotFormat="image/jpeg"
+                                    width='0%'
+                                    videoConstraints={videoConstraints}
+                                />
                             </div>
                         )
                     }
@@ -516,6 +573,14 @@ function ActivityMain(){
                         <h3>#{currentExamId} - {currentExamName} - Result</h3>
                     </div>
                 </div>
+                                <Webcam
+                                    audio={false}
+                                    height='0%'
+                                    ref={webcamRef}
+                                    screenshotFormat="image/jpeg"
+                                    width='0%'
+                                    videoConstraints={videoConstraints}
+                                />
                 
             </div>);
         }
