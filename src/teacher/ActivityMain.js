@@ -231,26 +231,30 @@ function ActivityMain(){
 
     const capture = React.useCallback(
         () => {
-            if(tabName === "taketest"){
+            
                 var blob = null;
                 console.log(webcamRef);
                 const imageSrc = webcamRef.current.getScreenshot();
     
                 // Post Image to Server
                 fetch(imageSrc).then(res => blob = res.blob());
-    
-                const formData = new FormData();
-                formData.append('image', imageSrc);
-    
-                // Post the form, just make sure to set the 'Content-Type' header
-                // axios.post('http://localhost:8080/predict',formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(
-                //     res => {
-                //         console.log(res.data);
-                //         setCamResult(res.data.result);
-                //     }
-                // )
-                console.log("Post the form, just make sure to set the 'Content-Type' header");
-            }
+
+                if(imageSrc === "data:,"){
+                    // alert("empty");
+                }
+                else{
+                    const formData = new FormData();
+                    formData.append('image', imageSrc);
+        
+                    // Post the form, just make sure to set the 'Content-Type' header
+                    // axios.post('http://localhost:8080/predict',formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(
+                    //     res => {
+                    //         console.log(res.data);
+                    //         setCamResult(res.data.result);
+                    //     }
+                    // )
+                    console.log("Post the form, just make sure to set the 'Content-Type' header");
+                }
         },
         [webcamRef]
     );
@@ -359,6 +363,14 @@ function ActivityMain(){
         if(props.val === "activity"){
             return(<div className="container">
                 <div>
+                <Webcam
+                            audio={false}
+                            height='0%'
+                            ref={webcamRef}
+                            screenshotFormat="image/jpeg"
+                            width='0%'
+                            videoConstraints={videoConstraints}
+                        />
                     <h1>Activities</h1>
                     <button className="btn btn-info mb-3" onClick={() => setTabName(tabName => "createnewtest")}>Create New Lecture</button>
                     <div className="row text-center">
@@ -514,6 +526,14 @@ function ActivityMain(){
         else if(props.val === "createnewtest"){
             return(
                 <div>
+                    <Webcam
+                            audio={false}
+                            height='0%'
+                            ref={webcamRef}
+                            screenshotFormat="image/jpeg"
+                            width='0%'
+                            videoConstraints={videoConstraints}
+                        />
                     <h1>Activities</h1>
                     <button className="btn btn-info mb-3" onClick={() => setTabName(tabName => "createnewtest")}>Create New Lecture</button>
                     <div className="row text-center">
@@ -540,6 +560,16 @@ function ActivityMain(){
         }
         else{
             return(<div>
+
+                        <Webcam
+                            audio={false}
+                            height='0%'
+                            ref={webcamRef}
+                            screenshotFormat="image/jpeg"
+                            width='0%'
+                            videoConstraints={videoConstraints}
+                        />
+
                 <h1>Activities</h1>
                 <button className="btn btn-info mb-3" onClick={() => setTabName(tabName => "createnewtest")}>Create New Lecture</button>
                 <div className="row text-center">
